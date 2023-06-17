@@ -33,12 +33,11 @@ public class AnnotationScanningTest {
 
     @Test
     void checkMapData() {
-        Map<String, Method> methodMap = reflectionPracticeScanner.getMethodMap();
+
         int methodCount = (int) Arrays.stream(controllerClass.getMethods())
                 .filter(method -> method.getDeclaredAnnotation(annotationClass) != null)
                 .count();
-        int methodMapSize = methodMap.size();
-
+        int methodMapSize = reflectionPracticeScanner.mapSize();
 //        methodMap.forEach((k,v) -> log.info("key = {}, value = {}", k, v.getName()));
         assertThat(methodCount).isEqualTo(methodMapSize);
 
@@ -46,9 +45,7 @@ public class AnnotationScanningTest {
 
     @Test
     void getMapMethod() throws InvocationTargetException, IllegalAccessException {
-        Map<String, Method> methodMap = reflectionPracticeScanner.getMethodMap();
-
-        Method method = methodMap.get("/hello");
+        Method method = reflectionPracticeScanner.getMethod("/hello");
         Long returnType = (Long) method.invoke(reflectionController);
         assertThat(returnType).isEqualTo(1L);
     }

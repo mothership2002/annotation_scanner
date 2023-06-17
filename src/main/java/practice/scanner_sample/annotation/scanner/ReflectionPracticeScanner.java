@@ -16,7 +16,6 @@ import java.util.Map;
 @Slf4j
 public class ReflectionPracticeScanner {
 
-    @Getter
     private final Map<String, Method> methodMap = new HashMap<>();
 
     @PostConstruct
@@ -25,6 +24,14 @@ public class ReflectionPracticeScanner {
         Arrays.stream(methods)
                 .filter(method -> method.getDeclaredAnnotation(ReflectionPractice.class) != null)
                 .forEach(method -> methodMap.put(method.getDeclaredAnnotation(ReflectionPractice.class).value(), method));
+    }
+
+    public Method getMethod(String key) {
+        return methodMap.get(key);
+    }
+
+    public int mapSize() {
+        return methodMap.size();
     }
 
 }
