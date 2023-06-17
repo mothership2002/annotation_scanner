@@ -35,6 +35,7 @@ public class ReflectionPracticeScanner {
         return methodMap.size();
     }
 
+    // 사실 컴포넌트가 필요하진 않지 위에 선언되어 있는 걸 쓰면 되니
     public Object invokeMethod(String key, Object component) throws InvocationTargetException, IllegalAccessException {
         return invokeMethod(key, component, null);
     }
